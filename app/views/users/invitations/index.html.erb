@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Users</h1>
+
+<div id="user-companies">
+  <% @user_companies.each do |user_company| %>
+    <%= render user_company %>
+    
+    <p>
+      <%= link_to "Show this user", user %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "Invite user", new_user_path %>

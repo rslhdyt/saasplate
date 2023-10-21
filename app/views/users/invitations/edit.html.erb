@@ -1,0 +1,87 @@
+<!--begin::Content-->
+<div class="content flex-column-fluid" id="kt_content">
+  <!--begin::Toolbar-->
+  <div class="toolbar d-flex flex-stack flex-wrap mb-5 mb-lg-7" id="kt_toolbar">
+    <!--begin::Page title-->
+    <div class="page-title d-flex flex-column py-1">
+      <!--begin::Title-->
+      <h1 class="d-flex align-items-center my-1">
+        <span class="text-dark fw-bolder fs-1">Edit Invitation</span>
+      </h1>
+      <!--end::Title-->
+
+      <!--begin::Breadcrumb-->
+      <!--end::Breadcrumb-->
+    </div>
+    <!--end::Page title-->
+  </div>
+  <!--end::Toolbar-->
+
+  <div class="card mb-5 mb-xl-10">
+    <!--begin::Card header-->
+    <div class="card-header border-0 cursor-pointer" role="button">
+      <!--begin::Card title-->
+      <div class="card-title m-0">
+        <h3 class="fw-bolder m-0">Invitation Form</h3>
+      </div>
+      <!--end::Card title-->
+    </div>
+    <!--end::Card header-->
+
+    <!--begin::Content-->
+    <!--begin::Form-->
+    <%= form_with(model: @user_company, url: invitation_path, method: :put, html: { class: 'form' }) do |f| %>
+      <!--begin::Card body-->
+      <div class="card-body border-top p-9">
+        <!--begin::Input group-->
+        <div class="row mb-6">
+          <!--begin::Label-->
+          <label class="col-lg-4 col-form-label required fw-bold fs-6">Name</label>
+          <!--end::Label-->
+          <!--begin::Col-->
+          <div class="col-lg-8 fv-row">
+            <%= f.text_field :user_name, class: 'form-control form-control-lg form-control-solid' %>
+          </div>
+          <!--end::Col-->
+        </div>
+        <!--end::Input group-->
+
+        <!--begin::Input group-->
+        <div class="row mb-6">
+          <!--begin::Label-->
+          <label class="col-lg-4 col-form-label required fw-bold fs-6">Email</label>
+          <!--end::Label-->
+          <!--begin::Col-->
+          <div class="col-lg-8 fv-row">
+            <%= f.text_field :user_email, class: 'form-control form-control-lg form-control-solid' %>
+          </div>
+          <!--end::Col-->
+        </div>
+        <!--end::Input group-->
+        
+        <!--begin::Input group-->
+        <div class="row mb-6">
+          <!--begin::Label-->
+          <label class="col-lg-4 col-form-label required fw-bold fs-6">Role</label>
+          <!--end::Label-->
+          <!--begin::Col-->
+          <div class="col-lg-8 fv-row">
+            <%= f.select :role, @roles, {}, class: 'form-control form-control-lg form-control-solid form-select form-select-solid' %>
+          </div>
+          <!--end::Col-->
+        </div>
+        <!--end::Input group-->
+      </div>
+      <!--end::Card body-->
+      <!--begin::Actions-->
+      <div class="card-footer d-flex justify-content-end py-6 px-9">
+        <%= link_to "Cancel", users_path, class: "btn btn-light btn-active-light-primary me-2" %>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+      <!--end::Actions-->
+    <% end %>
+    <!--end::Form-->
+    <!--end::Content-->
+  </div>
+</div>
+<!--end::Content-->

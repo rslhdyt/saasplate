@@ -1,0 +1,4 @@
+<%= link_to user_company.user_name, user_path(user_company.user) %>
+<%= user_company.user_email %>
+<%= user_company.role.try(:titlecase) %>
+<%= app_date(user_company.invitation_created_at) %>
