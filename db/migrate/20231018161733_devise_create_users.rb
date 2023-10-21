@@ -35,6 +35,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       # company
       t.string :name, null: false, default: ""
       t.integer :active_company_id, null: true
+      t.boolean :invited, null: false, default: false
 
       t.timestamps null: false
     end

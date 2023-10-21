@@ -30,7 +30,6 @@ module UserServices
         user_company.invitation_sent_at = Time.now.utc
         user_company.invited_by_type = @inviter.class.name
         user_company.invited_by_id = @inviter.id
-        user_company.role = @params[:role]
       end
     end
     # rubocop:enable Metrics/AbcSize

@@ -23,12 +23,14 @@ module Users
     def create
       @user = Users::InvitationForm.new(current_user, invite_params)
 
-      if @user.valid?
-        @user.save
-
-        redirect_to invitations_path, notice: I18n.t('pages.invitations.sent')
-      else
-        render :new
+      respond_to do |format|
+        if @user.save
+          format.html { redirect_to users_invitations_path, notice: "User invitation was successfully sent." }
+          format.json { render :show, status: :created, location: @user }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       end
     end
 
@@ -88,7 +90,7 @@ module Users
     end
 
     def invite_params
-      params.require(:user).permit(:name, :email, :role)
+      params.require(:user).permit(:name, :email)
     end
 
     def set_user_company

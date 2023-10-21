@@ -63,6 +63,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_18_165459) do
     t.string "unconfirmed_email"
     t.string "name", default: "", null: false
     t.integer "active_company_id"
+    t.boolean "invited", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["active_company_id"], name: "index_users_on_active_company_id"

@@ -259,6 +259,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-20
+  x86_64-darwin-22
   x86_64-linux
 
 DEPENDENCIES
@@ -282,7 +283,7 @@ DEPENDENCIES
   webdrivers
 
 RUBY VERSION
-   ruby 2.7.2p137
+   ruby 3.2.2p53
 
 BUNDLED WITH
-   2.2.32
+   2.4.21

@@ -3,10 +3,9 @@ module Users
     include ActiveModel::Model
 
     attr_accessor :name,
-                  :email,
-                  :role
+                  :email
 
-    validates_presence_of :name, :email, :role
+    validates_presence_of :name, :email
     validates_format_of :email, with: Devise.email_regexp
 
     def initialize(current_user, params = {})

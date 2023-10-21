@@ -1,0 +1,14 @@
+<div>
+    <h2>You're Invited!</h2>
+</div>
+
+<div>
+    <p>Dear <%= @user.name %>,</p>
+    <p>You have been invited to join <%= @company.name %> on an exciting journey. Click the link below to accept the invitation:</p>
+    <p>
+      <%= link_to 'Accept Invitation', accept_users_invitations_url(invitation_token: @token) %>
+    </p>
+    <p>We look forward to having you on board!</p>
+    <p>Best regards,</p>
+    <p><%= @company.name %> team</p>
+</div>
