@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   # GET /users or /users.json
   def index
     @users = current_active_company.users
+    @total_pending_invitations = total_pending_invitations
   end
 
   # GET /users/1 or /users/1.json
@@ -68,5 +69,11 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def user_params
       params.fetch(:user, {})
+    end
+
+    def total_pending_invitations
+      current_active_company.user_companies
+                            .invitation_not_accepted
+                            .count
     end
 end
