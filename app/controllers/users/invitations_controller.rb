@@ -66,7 +66,7 @@ module Users
       UserServices::ResendInvitation.call(@user_company)
 
       respond_to do |format|
-        format.turbo_stream { flash.now[:notice] = I18n.t('pages.invitations.sent') }
+        format.html { redirect_to users_invitations_path, notice: "User invitation was successfully sent." }
       end
     end
 

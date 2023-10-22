@@ -7,6 +7,8 @@ class CompaniesController < ApplicationController
   # GET /companies or /companies.json
   def index
     @companies = current_user.companies
+      .page(params[:page])
+      .per(params[:limit])
   end
 
   # GET /companies/1 or /companies/1.json
@@ -72,6 +74,6 @@ class CompaniesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def company_params
-      params.require(:company).permit(:name)
+      params.require(:company).permit(:name, :email)
     end
 end

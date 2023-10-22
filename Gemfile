@@ -67,10 +67,9 @@ group :test do
   gem "webdrivers"
 end
 
-gem "devise", "~> 4.9"
-
 gem "dotenv-rails", "~> 2.8"
-
+gem "devise", "~> 4.9"
 gem "dartsass-rails", "~> 0.5.0"
-
 gem "bootstrap", "~> 5.3"
+gem "kaminari", "~> 1.2"
+gem 'bootstrap5-kaminari-views'

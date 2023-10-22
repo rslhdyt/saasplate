@@ -5,7 +5,11 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    @users = current_active_company.users
+    @users = current_active_company
+      .users
+      .page(params[:page])
+      .per(params[:limit])
+
     @total_pending_invitations = total_pending_invitations
   end
 

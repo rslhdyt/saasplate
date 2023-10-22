@@ -11,19 +11,20 @@ Rails.application.routes.draw do
   }
   
   resources :companies
-  resources :users
-
+  
   namespace :users do
     resources :invitations, only: [:index, :new, :create, :edit, :update, :destroy], on: :collection do
       collection do
         get :accept
       end
-  
+      
       member do
         post :resend
       end
     end
   end
+  
+  resources :users
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -1,14 +1,69 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Companies</h1>
-
-<div id="companies">
-  <% @companies.each do |company| %>
-    <%= render company %>
-    <p>
-      <%= link_to "Show this company", company %>
-    </p>
-  <% end %>
+<div class="d-flex justify-content-between p-3 bg-light border-bottom">
+  <h1 class="pt-1 h4">Companies</h1>
+  <div class="text-end">
+    <%= link_to "Create company", new_company_path, class: "btn btn-outline-primary" %>
+  </div>
 </div>
 
-<%= link_to "New company", new_company_path %>
+<div class="container-fluid mt-4">
+  <div id="users">
+    <form class="row row-cols-lg-auto g-3 align-items-center">
+      <div class="col-12 col-lg-4">
+        <label class="visually-hidden" for="inlineFormSelectPref">Status</label>
+        <select class="form-select" id="inlineFormSelectPref">
+          <option selected>Choose...</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div class="col-12 col-lg-4">
+      </div>
+      <div class="col-12 col-lg-4">
+        <label class="visually-hidden" for="inlineFormInputGroupUsername">Search</label>
+        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Search">
+      </div>
+    </form>
+
+    <table class="table table-hoverable align-middle mt-4">
+      <thead class="table-light">
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Created At</th>
+          <th class="text-end"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @companies.each do |company| %>
+          <tr>
+            <td>
+              <%= company.name %>
+            </td>
+            <td><%= company.email %></td>
+            <td><%= app_date(company.created_at) %></td>
+            <td class="text-end">
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Actions
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <%= link_to "Edit", edit_company_path(company), class: 'dropdown-item' %>
+                  </li>
+                  <li>
+                    <%= button_to "Destroy", company, form: {
+                      class: 'dropdown-item p-0'
+                    }, method: :delete, class: 'btn btn-link text-decoration-none text-danger' %>
+                  </li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= paginate @companies %>
+  </div>
+</div>
