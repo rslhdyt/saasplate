@@ -70,3 +70,7 @@ end
 gem "devise", "~> 4.9"
 
 gem "dotenv-rails", "~> 2.8"
+
+gem "dartsass-rails", "~> 0.5.0"
+
+gem "bootstrap", "~> 5.3"
