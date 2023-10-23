@@ -4,7 +4,7 @@ module Users
   class InvitationsController < ApplicationController
     before_action :authenticate_user!, except: %i[accept]
 
-    before_action :set_user_company, only: %i[edit update destroy]
+    before_action :set_user_company, only: %i[show edit update destroy]
 
     def index
       @user_companies = current_active_company
@@ -17,8 +17,6 @@ module Users
     def new
       @user = Users::InvitationForm.new(current_user)
     end
-
-    def edit; end
 
     def create
       @user = Users::InvitationForm.new(current_user, invite_params)
@@ -33,6 +31,10 @@ module Users
         end
       end
     end
+
+    def show; end
+
+    def edit; end
 
     def accept
       invitation = UserServices::AcceptInvitation.call(params[:invitation_token])

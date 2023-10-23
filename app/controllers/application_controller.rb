@@ -9,9 +9,7 @@ class ApplicationController < ActionController::Base
     return unless current_user && current_user_companies_active.blank?
     return if current_active_company.present?
 
-    flash[:notice] = 'You need to create a company first.'
-
-    redirect_to new_company_path
+    redirect_to new_company_path, notice: 'You need to create a company first.'
   end
 
   def current_user_companies_active

@@ -6,7 +6,7 @@ import "popper"
 import "bootstrap"
 
 // sidebar
-window.addEventListener('DOMContentLoaded', event => {
+window.addEventListener('turbo:load', () => {
     // Toggle the side navigation
     const sidebarToggle = document.body.querySelector('#sidebarToggle');
     if (sidebarToggle) {

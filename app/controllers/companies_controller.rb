@@ -4,6 +4,8 @@ class CompaniesController < ApplicationController
 
   skip_before_action :user_has_company?, only: %i[new create]
 
+  layout :set_layout
+
   # GET /companies or /companies.json
   def index
     @companies = current_user.companies
@@ -75,5 +77,11 @@ class CompaniesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def company_params
       params.require(:company).permit(:name, :email)
+    end
+
+    def set_layout
+      return 'devise' if %w[new create].include? action_name
+
+      'application'
     end
 end

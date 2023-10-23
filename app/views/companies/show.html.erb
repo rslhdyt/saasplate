@@ -1,10 +1,10 @@
-<p style="color: green"><%= notice %></p>
+<div class="d-flex justify-content-between p-3 bg-light border-bottom">
+  <h1 class="pt-1 h4">Company</h1>
+  <div class="text-end">
+    <%= link_to "Back to companies", companies_path, class: "btn btn-outline-secondary" %>
+  </div>
+</div>
 
-<%= render @company %>
-
-<div>
-  <%= link_to "Edit this company", edit_company_path(@company) %> |
-  <%= link_to "Back to companies", companies_path %>
-
-  <%= button_to "Destroy this company", @company, method: :delete %>
+<div class="mt-4 px-3">
+  <%= render @company %>
 </div>

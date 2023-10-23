@@ -6,65 +6,63 @@
   </div>
 </div>
 
-<div class="container-fluid mt-4">
-  <div id="users">
-    <form class="row row-cols-lg-auto g-3 align-items-center">
-      <div class="col-12 col-lg-4">
-        <label class="visually-hidden" for="inlineFormSelectPref">Status</label>
-        <select class="form-select" id="inlineFormSelectPref">
-          <option selected>Choose...</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-      </div>
-      <div class="col-12 col-lg-4">
-      </div>
-      <div class="col-12 col-lg-4">
-        <label class="visually-hidden" for="inlineFormInputGroupUsername">Search</label>
-        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Search">
-      </div>
-    </form>
+<div id="users" class="mt-4 px-3">
+  <form class="row row-cols-lg-auto g-3 align-items-center">
+    <div class="col-12 col-lg-4">
+      <label class="visually-hidden" for="inlineFormSelectPref">Status</label>
+      <select class="form-select" id="inlineFormSelectPref">
+        <option selected>Choose...</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+    <div class="col-12 col-lg-4">
+    </div>
+    <div class="col-12 col-lg-4">
+      <label class="visually-hidden" for="inlineFormInputGroupUsername">Search</label>
+      <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Search">
+    </div>
+  </form>
 
-    <table class="table table-hoverable align-middle mt-4">
-      <thead class="table-light">
+  <table class="table table-hoverable align-middle mt-4">
+    <thead class="table-light">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th class="text-end"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @user_companies.each do |user_company| %>
         <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th class="text-end"></th>
+          <td>
+            <%= link_to user_company.user_name, users_invitation_path(user_company) %>
+          </td>
+          <td><%= user_company.user_email %></td>
+          <td class="text-end">
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Actions
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <%= button_to "Resend invitation", resend_users_invitation_path(user_company), form: {
+                    class: 'dropdown-item p-0'
+                  }, method: :post, class: 'btn btn-link text-decoration-none text-reset' %>
+                </li>
+                <li>
+                  <%= button_to "Cancel invitation", users_invitations_path(user_company), form: {
+                    class: 'dropdown-item p-0'
+                  }, method: :delete, class: 'btn btn-link text-decoration-none text-danger' %>
+                </li>
+              </ul>
+            </div>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        <% @user_companies.each do |user_company| %>
-          <tr>
-            <td>
-              <%= user_company.user_name %>
-            </td>
-            <td><%= user_company.user_email %></td>
-            <td class="text-end">
-              <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Actions
-                </button>
-                <ul class="dropdown-menu">
-                  <li>
-                    <%= button_to "Resend invitation", resend_users_invitation_path(user_company), form: {
-                      class: 'dropdown-item p-0'
-                    }, method: :post, class: 'btn btn-link text-decoration-none text-reset' %>
-                  </li>
-                  <li>
-                    <%= button_to "Cancel invitation", users_invitations_path(user_company), form: {
-                      class: 'dropdown-item p-0'
-                    }, method: :delete, class: 'btn btn-link text-decoration-none text-danger' %>
-                  </li>
-                </ul>
-              </div>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+      <% end %>
+    </tbody>
+  </table>
 
-    <%= paginate @user_companies %>
-  </div>
+  <%= paginate @user_companies %>
 </div>

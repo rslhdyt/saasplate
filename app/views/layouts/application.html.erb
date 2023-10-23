@@ -11,27 +11,22 @@
   </head>
 
   <body>
-    <div id="wrapper" class="d-flex">
-      <!-- Sidebar-->
-      <div id="sidebar-wrapper" class="d-flex align-items-end flex-column border-end bg-white">
-        <div class="sidebar-heading border-bottom bg-light w-100">SAASPLATE</div>
-        <div class="list-group list-group-flush border-bottom">
-          <%= link_to "Home", root_path, class: 'list-group-item list-group-item-action list-group-item-light p-3' %>
-          <%= link_to "Companies", companies_path, class: 'list-group-item list-group-item-action list-group-item-light p-3' %>
-          <%= link_to "Users", users_path, class: 'list-group-item list-group-item-action list-group-item-light p-3' %>
-        </div>
+    <div class="alert alert-primary rounded-0 sticky-top mb-0 alert-dismissible fade show" role="alert">
+      A simple primary alert—check it out!
 
-        <div class="list-group list-group-flush mt-auto">
-          <% if current_user %>
-            <%= button_to 'Sign out', destroy_user_session_path, method: :delete, class: 'list-group-item list-group-item-action list-group-item-light p-3' %>
-          <% end %>
-        </div>
-      </div>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div id="wrapper" class="d-flex">
+      <%= render 'layouts/partials/sidebar' %>
+
       <!-- Page content wrapper-->
       <div id="page-content-wrapper">
         <%= render 'layouts/partials/navbar' %>
 
         <!-- Page content-->
+
+        <%= render 'layouts/partials/toast' %>
+        
         <%= yield %>
         <!-- End of page content -->
       </div>

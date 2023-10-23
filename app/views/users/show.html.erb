@@ -1,10 +1,10 @@
-<p style="color: green"><%= notice %></p>
+<div class="d-flex justify-content-between p-3 bg-light border-bottom">
+  <h1 class="pt-1 h4">User</h1>
+  <div class="text-end">
+    <%= link_to "Back to users", users_path, class: "btn btn-outline-secondary" %>
+  </div>
+</div>
 
-<%= render @user %>
-
-<div>
-  <%= link_to "Edit this user", edit_user_path(@user) %> |
-  <%= link_to "Back to users", users_path %>
-
-  <%= button_to "Destroy this user", @user, method: :delete %>
+<div class="mt-4 px-3">
+  <%= render @user %>
 </div>

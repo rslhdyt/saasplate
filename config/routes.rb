@@ -10,10 +10,11 @@ Rails.application.routes.draw do
     sign_out: 'sign_out'
   }
   
+  resource :active_company, only: %i[update]
   resources :companies
   
   namespace :users do
-    resources :invitations, only: [:index, :new, :create, :edit, :update, :destroy], on: :collection do
+    resources :invitations do
       collection do
         get :accept
       end
@@ -24,7 +25,8 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :users
+  resources :users, except: %i[new create]
+  resource :profile, only: %i[show edit update]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

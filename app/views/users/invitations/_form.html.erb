@@ -1,27 +1,28 @@
-<%= form_for(user, url: users_invitations_path, html: { method: :post }) do |form| %>
+<%= form_for(user, url: users_invitations_path, html: { method: :post, class: 'w-50' }) do |form| %>
   <% if user.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <h4 class="alert-heading">Warning</h4>
+      <p><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</p>
+      <hr>
       <ul>
         <% user.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
+
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="mb-3">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
   </div>
   
-  <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
+  <div class="mb-3">
+    <%= form.label :email, class: "form-label" %>
+    <%= form.email_field :email, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.submit "Send invitation" %>
-  </div>
+  <%= form.submit "Send invitation", class: "btn btn-primary" %>
 <% end %>

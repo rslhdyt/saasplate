@@ -1,0 +1,46 @@
+<%= form_with(model: current_user, url: user_path(current_user)) do |form| %>
+  <h5>Personal Info</h5>
+  <div class="row">
+    <%= form.label :name, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-10">
+      <%= form.text_field :name, value: current_user.name, class: "form-control-plaintext", readonly: true %>
+    </div>
+  </div>
+
+  <div class="row">
+    <%= form.label :email, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-10">
+      <%= form.text_field :email, value: current_user.email, class: "form-control-plaintext", readonly: true %>
+    </div>
+  </div>
+
+  <div class="row">
+    <%= form.label "Created At", class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-10">
+      <%= form.text_field :invited_at, value: app_date(current_user.created_at), class: "form-control-plaintext", readonly: true %>
+    </div>
+  </div>
+
+  <h5 class="mt-4">Company Info</h5>
+
+  <div class="row">
+    <%= form.label "Name", class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-10">
+      <%= form.text_field :name, value: current_active_company.name, class: "form-control-plaintext", readonly: true %>
+    </div>
+  </div>
+
+  <div class="row">
+    <%= form.label "Email", class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-10">
+      <%= form.text_field :email, value: current_active_company.email, class: "form-control-plaintext", readonly: true %>
+    </div>
+  </div>
+
+  <div class="row">
+    <%= form.label "Created At", class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-10">
+      <%= form.text_field :invited_at, value: app_date(current_active_company.created_at), class: "form-control-plaintext", readonly: true %>
+    </div>
+  </div>
+<% end %>

@@ -38,7 +38,7 @@
         <% @companies.each do |company| %>
           <tr>
             <td>
-              <%= company.name %>
+              <%= link_to company.name, company_path(company) %>
             </td>
             <td><%= company.email %></td>
             <td><%= app_date(company.created_at) %></td>
@@ -50,6 +50,15 @@
                 <ul class="dropdown-menu">
                   <li>
                     <%= link_to "Edit", edit_company_path(company), class: 'dropdown-item' %>
+                  </li>
+                  <li>
+                    <%= button_to "Choose company", active_company_path, form: {
+                        class: 'dropdown-item p-0'
+                      },
+                      method: :put, 
+                      params: { 
+                        company_id: company.id 
+                      }, class: 'btn btn-link text-decoration-none text-reset' %>
                   </li>
                   <li>
                     <%= button_to "Destroy", company, form: {

@@ -4,7 +4,7 @@
     <%= link_to users_invitations_path, class: "btn btn-outline-secondary" do %>
       Pending invitations
       <span class="badge text-bg-secondary"><%= @total_pending_invitations %></span>
-    <% end if @total_pending_invitations.present? %>
+    <% end unless @total_pending_invitations.zero? %>
     <%= link_to "Invite user", new_users_invitation_path, class: "btn btn-outline-primary" %>
   </div>
 </div>
@@ -38,12 +38,12 @@
         </tr>
       </thead>
       <tbody>
-        <% @users.each do |user| %>
+        <% @users.each do |user_company| %>
           <tr>
             <td>
-              <%= link_to user.name, user_path(user) %>
+              <%= link_to user_company.user_name, user_path(user_company.user) %>
             </td>
-            <td><%= user.email %></td>
+            <td><%= user_company.user_email %></td>
             <td class="text-end">
               <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -51,10 +51,10 @@
                 </button>
                 <ul class="dropdown-menu">
                   <li>
-                    <%= link_to "Edit", edit_user_path(user), class: 'dropdown-item' %>
+                    <%= link_to "Edit", edit_user_path(user_company.user), class: 'dropdown-item' %>
                   </li>
                   <li>
-                    <%= button_to "Destroy", user, form: {
+                    <%= button_to "Destroy", user_company.user, form: {
                       class: 'dropdown-item p-0'
                     }, method: :delete, class: 'btn btn-link text-decoration-none text-danger' %>
                   </li>

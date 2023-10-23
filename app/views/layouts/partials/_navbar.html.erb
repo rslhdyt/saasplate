@@ -12,8 +12,8 @@
             <p class="small text-secondary fw-lighter p-0 mb-0"><%= current_active_company.name.titlecase %></p>
           </div>
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#!">Action</a>
-            <a class="dropdown-item" href="#!">Another action</a>
+            <%= link_to "Profile", profile_path, class: "dropdown-item" %>
+            <%= link_to "My Companies", companies_path, class: 'dropdown-item' %>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#!">Something else here</a>
           </div>

@@ -1,22 +1,28 @@
-<%= form_with(model: company) do |form| %>
+<%= form_for(company, html: { class: 'w-50' }) do |form| %>
   <% if company.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(company.errors.count, "error") %> prohibited this company from being saved:</h2>
-
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <h4 class="alert-heading">Warning</h4>
+      <p><%= pluralize(company.errors.count, "error") %> prohibited this company from being saved:</p>
+      <hr>
       <ul>
         <% company.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
+
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="mb-3">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+  
+  <div class="mb-3">
+    <%= form.label :email, class: "form-label" %>
+    <%= form.email_field :email, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.submit %>
-  </div>
+  <%= form.submit class: "btn btn-primary" %>
 <% end %>
