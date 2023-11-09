@@ -1,0 +1,12 @@
+<h2>Log in with magic link</h2>
+
+<%= form_with(model: @user, url: user_session_links_path) do |f| %>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Send Magic Link" %>
+  </div>
+<% end %>

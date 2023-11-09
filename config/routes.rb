@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users,
+
   controllers: {
     registrations: 'users/registrations'
   },
@@ -9,6 +10,11 @@ Rails.application.routes.draw do
     sign_up: 'sign_up',
     sign_out: 'sign_out'
   }
+
+  # magic link sign in
+  get 'sign_in/links', to: 'users/session_links#new', as: :new_user_session_link
+  post 'sign_in/links', to: 'users/session_links#create', as: :user_session_links
+  get 'sign_in/links/authenticate/:token', to: 'users/session_links#authenticate', as: :authenticate_user_session_link
   
   resource :active_company, only: %i[update]
   resources :companies

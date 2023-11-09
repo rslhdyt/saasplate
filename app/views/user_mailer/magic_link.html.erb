@@ -1,0 +1,11 @@
+<div>
+    <h2>Welcome back!</h2>
+</div>
+
+<div>
+  <p>Dear <%= @user.name %>,</p>
+  <p>Click the link below to log in:</p>
+  <%= link_to 'Login with link', authenticate_user_session_link_url(token: @token) %>
+  <p>This link will expire in 2 minutes.</p>
+  <p>If you did not request this login link, please ignore this email.</p>
+</div>

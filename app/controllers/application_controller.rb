@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  add_flash_types :info, :error, :warning
+
   before_action :user_has_company?
 
   delegate :current_active_company, to: :helpers

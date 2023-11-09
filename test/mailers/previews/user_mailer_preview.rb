@@ -7,4 +7,11 @@ class UserMailerPreview < ActionMailer::Preview
 
     UserMailer.invitation(user.id, user_company.id, token)
   end
+
+  def magic_link
+    user = User.first
+    token = user.signed_id(expires_in: 15.minutes, purpose: :magic_link)
+
+    UserMailer.magic_link(user.id, token)
+  end
 end
