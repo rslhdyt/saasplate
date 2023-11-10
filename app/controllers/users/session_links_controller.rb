@@ -25,11 +25,11 @@ module Users
       @user = User.find_signed(params[:token], purpose: :magic_link)
 
       if @user.present?
-        sign_in(@user)
-
         flash[:success] = 'You have successfully logged in.'
 
-        redirect_to root_path
+        sign_in(@user)
+
+        redirect_to after_sign_in_path_for(@user)
       else
         flash[:info] = 'Link invalid or expired. Please try again.'
 

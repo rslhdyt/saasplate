@@ -1,0 +1,28 @@
+<div class="d-flex justify-content-between p-3 bg-light border-bottom">
+  <h1 class="pt-1 h4">Settings / 2FA</h1>
+</div>
+
+<div class="mt-4 px-3">
+  <%= raw RQRCode::QRCode.new(@profisioning_url).as_svg(
+      color: "000",
+      shape_rendering: "crispEdges",
+      module_size: 4,
+      standalone: true,
+      use_path: true
+  ) %>
+
+
+  <%= form_with(url: two_fa_settings_security_path, method: :patch, html: { class: 'w-25 mt-3' }) do |form| %>
+    <div class="mb-3">
+      <p class="form-label">Unable to scan? You can use the <a href="#">setup code</a> to manually configure your authenticator app.</p>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label 'Verify code from authenticator app', class: 'form-label' %>
+      <%= form.text_field :otp_attempt, class: 'form-control', placeholder: 'XXXXXX' %>
+    </div>
+
+    <%= form.submit 'Submit', class: 'btn btn-primary' %>
+    <%= link_to 'Cancel', settings_security_path, class: 'btn btn-link' %>
+  <% end %>
+</div>

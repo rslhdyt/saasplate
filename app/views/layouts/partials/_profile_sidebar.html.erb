@@ -1,0 +1,14 @@
+<!-- Sidebar-->
+<div id="sidebar-wrapper" class="d-flex align-items-end flex-column border-end bg-white">
+  <div class="sidebar-heading border-bottom bg-light w-100">SAASPLATE</div>
+  <div class="list-group list-group-flush border-bottom">
+    <%= link_to "General", root_path, class: 'list-group-item list-group-item-action list-group-item-light p-3' %>
+    <%= link_to "Users", users_path, class: 'list-group-item list-group-item-action list-group-item-light p-3' %>
+  </div>
+
+  <div class="list-group list-group-flush mt-auto">
+    <% if current_user %>
+      <%= button_to 'Sign out', destroy_user_session_path, method: :delete, class: 'list-group-item list-group-item-action list-group-item-light p-3' %>
+    <% end %>
+  </div>
+</div>

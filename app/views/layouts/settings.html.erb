@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Saasplate</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <div id="wrapper" class="d-flex">
+      <%= render 'layouts/partials/profile_sidebar' %>
+
+      <!-- Page content wrapper-->
+      <div id="page-content-wrapper">
+        <%= render 'layouts/partials/navbar' %>
+
+        <!-- Page content-->
+
+        <%= render 'layouts/partials/toast' %>
+        
+        <%= yield %>
+        <!-- End of page content -->
+      </div>
+    </div>
+  </body>
+</html>

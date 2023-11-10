@@ -58,6 +58,8 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+
+  gem 'pry-rails'
 end
 
 group :test do
@@ -69,6 +71,8 @@ end
 
 gem "dotenv-rails", "~> 2.8"
 gem "devise", "~> 4.9"
+gem 'devise-two-factor'
+gem "rqrcode"
 gem "dartsass-rails", "~> 0.5.0"
 gem "bootstrap", "~> 5.3"
 gem "kaminari", "~> 1.2"

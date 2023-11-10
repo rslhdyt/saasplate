@@ -1,0 +1,10 @@
+
+<h2>Enter OTP</h2>
+
+<%= form_with(model: @user, url: user_sign_in_otp_path, method: :post) do |f| %>
+  <div class="form-group">
+    <%= f.label :otp_attempt, "OTP Code", class: 'form-label' %>
+    <%= f.text_field :otp_attempt, class: 'form-control' %>
+  </div>
+  <%= f.submit "Submit", class: 'btn btn-primary' %>
+<% end %>

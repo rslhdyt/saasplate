@@ -37,6 +37,11 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       t.integer :active_company_id, null: true
       t.boolean :invited, null: false, default: false
 
+      # 2FA
+      t.string :otp_secret
+      t.integer :consumed_timestep
+      t.boolean :otp_required_for_login, default: false
+
       t.timestamps null: false
     end
 

@@ -23,5 +23,6 @@ module Saasplate
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.application_name = ENV['APPLICATION_NAME']
   end
 end

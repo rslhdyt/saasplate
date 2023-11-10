@@ -1,0 +1,18 @@
+<div class="d-flex justify-content-between p-3 bg-light border-bottom">
+  <h1 class="pt-1 h4">Security</h1>
+</div>
+
+<div class="mt-4 px-3">
+  <div class="card">
+    <div class="card-header">2FA</div>
+    <div class="card-body">
+      <% if current_user.otp_required_for_login? %>
+        <div class="alert alert-success rounded-0 sticky-top mb-0 fade show mb-3" role="alert">
+          2FA enabled and configured
+        </div>
+      <% end %>
+
+      <%= link_to 'Configure two factor auth', two_fa_settings_security_path, class: 'btn btn-primary' %>
+    </div>
+  </div>
+</div>
