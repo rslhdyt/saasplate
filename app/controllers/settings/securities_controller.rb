@@ -1,9 +1,5 @@
 module Settings
-  class SecuritiesController < ApplicationController
-    before_action :authenticate_user!
-
-    layout 'settings'
-
+  class SecuritiesController < SettingsController
     def show
       @user = current_user
     end

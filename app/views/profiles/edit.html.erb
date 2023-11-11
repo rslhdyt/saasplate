@@ -1,0 +1,21 @@
+<div class="d-flex justify-content-between p-3 bg-light border-bottom">
+  <h1 class="pt-1 h4">Edit Profile</h1>
+</div>
+
+<div class="mt-4 px-3">
+  <%= form_with(model: @user, url: profile_path, html: { class: 'w-50' }, method: :patch) do |form| %>
+    <% render 'shared/form_error', resource: @user %>
+
+    <div class="mb-3">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+    
+    <div class="mb-3">
+      <%= form.label :email, class: "form-label" %>
+      <%= form.email_field :email, class: "form-control", readonly: true %>
+    </div>
+
+    <%= form.submit class: "btn btn-primary" %>
+  <% end %>
+</div>

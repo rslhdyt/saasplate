@@ -1,5 +1,5 @@
 module Settings
-  class TwoFasController < ApplicationController
+  class TwoFasController < SettingsController
     def edit
       issuer = Rails.configuration.application_name
       label = current_user.email

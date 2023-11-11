@@ -1,11 +1,9 @@
-class ProfilesController < ApplicationController
-  layout 'settings'
-
-  before_action :authenticate_user!
-
+class ProfilesController < SettingsController
   def show; end
 
-  def edit; end
+  def edit
+    @user = current_user
+  end
 
   def update
     return render :edit unless current_user.update(profile_params)
