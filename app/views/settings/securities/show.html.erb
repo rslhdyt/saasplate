@@ -3,16 +3,52 @@
 </div>
 
 <div class="mt-4 px-3">
+  <div class="card mb-4">
+    <div class="card-header">Password</div>
+    <div class="card-body">
+      <%= form_with(model: @user, url: settings_security_path, html: { class: 'w-50' }, method: :patch) do |form| %>
+        <%= render 'shared/form_error', resource: @user %>
+
+        <div class="mb-3">
+          <%= form.label :old_password, class: "form-label" %>
+          <%= form.password_field :old_password, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :password, 'New password', class: "form-label" %>
+          <%= form.password_field :password, class: "form-control" %>
+        </div>
+        
+        <div class="mb-3">
+          <%= form.label :password_confirmation, 'New password confirmation', class: "form-label" %>
+          <%= form.password_field :password_confirmation, class: "form-control" %>
+        </div>
+
+        <%= form.submit "Update Password", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+
   <div class="card">
     <div class="card-header">2FA</div>
     <div class="card-body">
-      <% if current_user.otp_required_for_login? %>
+      <% if @user.otp_required_for_login? %>
         <div class="alert alert-success rounded-0 sticky-top mb-0 fade show mb-3" role="alert">
           2FA enabled and configured
         </div>
       <% end %>
 
-      <%= link_to 'Configure two factor auth', two_fa_settings_security_path, class: 'btn btn-primary' %>
+      <div class="d-flex">
+        <%= link_to 'Configure two factor auth', edit_settings_two_fa_path, class: 'btn btn-primary me-2' %>
+        <%= button_to 'Disable', settings_two_fa_path, form: { 
+            data: { 
+              turbo_confirm: 'Are you sure?',
+              turbo_method: :delete
+            } 
+          }, 
+          method: :delete, 
+          class: 'btn btn-danger' if @user.otp_required_for_login? %>
+      </div>
     </div>
   </div>
 </div>

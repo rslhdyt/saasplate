@@ -11,14 +11,16 @@ Rails.application.routes.draw do
       sign_out: 'sign_out'
     }
 
-  # magic link sign in 
-  get 'sign_in/link', to: 'users/session_links#new', as: :new_user_session_link
-  post 'sign_in/link', to: 'users/session_links#create', as: :user_session_link
-  get 'sign_in/link/authenticate/:token', to: 'users/session_links#authenticate', as: :authenticate_user_session_link
-
-  # 2FA handler
-  get 'sign_in/otp', to: 'users/session_otps#new', as: :new_user_sign_in_otp
-  post 'sign_in/otp', to: 'users/session_otps#create', as: :user_sign_in_otp
+  scope :sign_in, as: :user_session do
+    # Login with link handler
+    resource :link, only: %i[new create], controller: 'users/session_links' do
+      member do
+        get 'authenticate/:token', action: :authenticate, as: :authenticate
+      end
+    end
+    # 2FA handler
+    resource :otp, only: %i[new create], controller: 'users/session_otps' 
+  end
   
   resource :active_company, only: %i[update]
   resources :companies
@@ -36,13 +38,8 @@ Rails.application.routes.draw do
   end
 
   namespace :settings do
-    resource :security, only: %i[show] do
-      member do
-        # 2FA
-        get 'two_fa', action: :edit_two_fa
-        patch 'two_fa', action: :update_two_fa
-      end
-    end
+    resource :security, only: %i[show update]
+    resource :two_fa, only: %i[edit update destroy]
   end
   
   resources :users, except: %i[new create]

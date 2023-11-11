@@ -25,15 +25,31 @@ module Users
       @user = User.find_signed(params[:token], purpose: :magic_link)
 
       if @user.present?
-        flash[:success] = 'You have successfully logged in.'
+        if resource.otp_required_for_login?
+          session[:otp_user_id] = @user.id
 
-        sign_in(@user)
+          redirect_to new_user_session_otp_path
+        else
+          flash[:success] = 'You have successfully logged in.'
 
-        redirect_to after_sign_in_path_for(@user)
+          sign_in(@user)
+
+          redirect_to root_path
+        end
       else
         flash[:info] = 'Link invalid or expired. Please try again.'
 
         redirect_to new_user_session_path
+      end
+    end
+
+    private
+
+    def redirect_after_sign_in_path
+      if @user.admin?
+        admin_root_path
+      else
+        root_path
       end
     end
   end

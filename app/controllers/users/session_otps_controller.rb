@@ -8,6 +8,7 @@ module Users
 
     def create
       if @user.validate_and_consume_otp!(params[:user][:otp_attempt])
+        flash[:success] = 'You have successfully logged in.'
         session[:otp_user_id] = nil
 
         sign_in(@user)
@@ -16,7 +17,7 @@ module Users
       else
         flash[:danger] = "Invalid OTP code"
 
-        redirect_to new_user_sign_in_otp_path
+        redirect_to new_user_session_otp_path
       end
     end
 

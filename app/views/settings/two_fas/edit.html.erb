@@ -12,7 +12,7 @@
   ) %>
 
 
-  <%= form_with(url: two_fa_settings_security_path, method: :patch, html: { class: 'w-25 mt-3' }) do |form| %>
+  <%= form_with(url: settings_two_fa_path, method: :patch, html: { class: 'w-25 mt-3' }) do |form| %>
     <div class="mb-3">
       <p class="form-label">Unable to scan? You can use the <a href="#">setup code</a> to manually configure your authenticator app.</p>
     </div>

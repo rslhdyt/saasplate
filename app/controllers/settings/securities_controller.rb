@@ -1,26 +1,33 @@
 module Settings
   class SecuritiesController < ApplicationController
+    before_action :authenticate_user!
+
     layout 'settings'
 
-    def show; end
-
-    def edit_two_fa
-      issuer = Rails.configuration.application_name
-      label = "#{issuer}:#{current_user.email}"
-
-      @profisioning_url = current_user.otp_provisioning_uri(label, issuer: issuer)
+    def show
+      @user = current_user
     end
 
-    def update_two_fa
-      if current_user.validate_and_consume_otp!(params[:otp_attempt])
-        current_user.update(otp_required_for_login: true)
+    def update
+      @user = current_user
 
-        redirect_to edit_settings_two_fa_path, notice: 'Two factor authentication enabled.'
-      else
-        flash[:danger] = 'Invalid two factor authentication code.'
+      if @user.valid_password?(security_params[:old_password])
+        @user.update(password: security_params[:password])
 
-        redirect_to edit_settings_two_fa_path
+        flash[:success] = 'Password successfully updated.'
+
+        return redirect_to settings_security_path
       end
+
+      flash[:danger] = 'Invalid email or password.'
+
+      redirect_to new_user_session_path
+    end
+
+    private
+
+    def security_params
+      params.require(:user).permit(:old_password, :password, :password_confirmation)
     end
   end
 end
