@@ -1,6 +1,15 @@
-<% flash.each do |type, message| %>
+<% flash.each do |flash_type, message| %>
+  <%
+    if flash_type == 'notice'
+      flash_type = 'success'
+    end
+
+    if flash_type == 'alert'
+      flash_type = 'warning'
+    end
+  %>
   <div class="toast-container top-0 start-50 translate-middle-x mt-3">
-    <div data-controller="toast" data-bs-delay="3000" class="toast hide text-bg-<%= type %>" role="alert" aria-live="assertive" aria-atomic="true">
+    <div data-controller="toast" data-bs-delay="3000" class="toast hide text-bg-<%= flash_type %>" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="d-flex">
         <div class="toast-body">
           <%= message %>

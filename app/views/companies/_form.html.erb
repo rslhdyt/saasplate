@@ -1,18 +1,5 @@
 <%= form_for(company, html: { class: 'w-50' }) do |form| %>
-  <% if company.errors.any? %>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      <h4 class="alert-heading">Warning</h4>
-      <p><%= pluralize(company.errors.count, "error") %> prohibited this company from being saved:</p>
-      <hr>
-      <ul>
-        <% company.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  <% end %>
+  <%= render 'shared/form_error', resource: company %> 
 
   <div class="mb-3">
     <%= form.label :name, class: "form-label" %>

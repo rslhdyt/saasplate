@@ -11,10 +11,9 @@
       use_path: true
   ) %>
 
-
   <%= form_with(url: settings_two_fa_path, method: :patch, html: { class: 'w-25 mt-3' }) do |form| %>
     <div class="mb-3">
-      <p class="form-label">Unable to scan? You can use the <a href="#">setup code</a> to manually configure your authenticator app.</p>
+      <p class="form-label">Unable to scan? You can use the <a href="#" data-bs-toggle="modal" data-bs-target="#two_fas_setup_code_modal">setup code</a> to manually configure your authenticator app.</p>
     </div>
 
     <div class="mb-3">
@@ -25,4 +24,22 @@
     <%= form.submit 'Submit', class: 'btn btn-primary' %>
     <%= link_to 'Cancel', settings_security_path, class: 'btn btn-link' %>
   <% end %>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="two_fas_setup_code_modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">2FA setup code</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h4><%= @totp %></h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>

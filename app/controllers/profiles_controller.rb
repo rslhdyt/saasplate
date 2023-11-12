@@ -6,9 +6,11 @@ class ProfilesController < SettingsController
   end
 
   def update
-    return render :edit unless current_user.update(profile_params)
-
-    redirect_to profile_path, notice: I18n.t('pages.profiles.update')
+    if current_user.update(profile_params)
+      redirect_to profile_path, notice: I18n.t('pages.profiles.update')
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   private

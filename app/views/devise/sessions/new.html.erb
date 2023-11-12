@@ -1,26 +1,65 @@
-<h2>Log in</h2>
+<!-- Step 1: Add Bootstrap to the project -->
+<!-- Add the following line to the head section of your application.html.erb file -->
+<!-- <%= stylesheet_link_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css' %> -->
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+<!-- Step 2: Create a new file for the sign-up page -->
+<!-- Create a new file called new.html.erb in the registrations folder -->
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+<!-- Step 3: Add the logo and application name to the top of the page -->
+<!-- Add the following code to the new.html.erb file -->
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-4 col-md-6 col-sm-12">
+      <div class="text-center mb-4">
+        <img class="mb-4" src="https://via.placeholder.com/150" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Sign in to <%= Rails.configuration.application_name %></h1>
+      </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <!-- Step 4: Create a card with a grey background for the login form -->
+      <!-- Add the following code to the new.html.erb file -->
+      <div class="card bg-light mb-4">
+        <div class="card-body pb-4">
+          <!-- Step 5: Add the login form to the card -->
+          <!-- Add the following code to the new.html.erb file -->
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <div class="mb-3">
+              <%= f.label :email, class: 'form-label' %>
+              <%= f.email_field :email, class: 'form-control', autofocus: true, autocomplete: "email" %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :password, class: 'form-label' %>
+              <%= link_to 'Forgot your password?', new_password_path(resource_name), class: 'text-decoration-none fs-6 float-end' %>
+              <%= f.password_field :password, class: 'form-control', autocomplete: "password" %>
+            </div>
+
+            <div class="d-grid gap-2">
+              <%= f.submit "Sign In", class: 'btn btn-primary' %>
+            </div>
+
+            <p class="text-divider text-muted mt-3">or</p>
+
+            <div class="d-grid gap-2">
+              <%= link_to "Login with link", new_user_session_link_path, class: 'btn btn-outline-primary' %>
+            </div>
+
+            <%- if devise_mapping.omniauthable? %>
+
+              <%- resource_class.omniauth_providers.each do |provider| %>
+                <%= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), data: { turbo: false } %><br />
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body text-center">
+          Don't have an account? <%= link_to 'Create an account', new_registration_path(resource_name) %>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
+</div>
 
-<%= render "devise/shared/links" %>
+<% render "devise/shared/links" %>

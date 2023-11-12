@@ -1,12 +1,44 @@
-<h2>Log in with magic link</h2>
+<!-- Step 1: Add Bootstrap to the project -->
+<!-- Add the following line to the head section of your application.html.erb file -->
+<!-- <%= stylesheet_link_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css' %> -->
 
-<%= form_with(model: @user, url: user_session_link_path) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+<!-- Step 2: Create a new file for the sign-up page -->
+<!-- Create a new file called new.html.erb in the registrations folder -->
 
-  <div class="actions">
-    <%= f.submit "Send Magic Link" %>
+<!-- Step 3: Add the logo and application name to the top of the page -->
+<!-- Add the following code to the new.html.erb file -->
+<div class="container mt-5 w-50">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="text-center mb-4">
+        <img class="mb-4" src="https://via.placeholder.com/150" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Link sign in to <%= Rails.configuration.application_name %></h1>
+      </div>
+
+      <!-- Step 4: Create a card with a grey background for the login form -->
+      <!-- Add the following code to the new.html.erb file -->
+      <div class="card bg-light mb-4">
+        <div class="card-body pb-4">
+          <!-- Step 5: Add the login form to the card -->
+          <!-- Add the following code to the new.html.erb file -->
+          <%= form_with(model: @user, url: user_session_link_path) do |f| %>
+            <div class="mb-3">
+              <%= f.label :email, class: 'form-label' %>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+            </div>
+
+            <div class="d-grid gap-2">
+              <%= f.submit "Send Magic Link", class: 'btn btn-primary' %>
+            </div>
+
+            <p class="text-divider text-muted mt-3">or</p>
+
+            <div class="d-grid gap-2">
+              <%= link_to "Use another sign in method", new_user_session_path, class: 'btn btn-outline-primary' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-<% end %>
+</div>
