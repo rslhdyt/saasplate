@@ -6,12 +6,12 @@ class ApplicationController < ActionController::Base
   delegate :current_active_company, to: :helpers
 
   def user_has_company?
-    return if %w[sessions].include?(controller_name)
+    return if %w[sessions registrations].include?(controller_name)
 
     return unless current_user && current_user_companies_active.blank?
     return if current_active_company.present?
 
-    redirect_to new_company_path, notice: 'You need to create a company first.'
+    redirect_to new_company_registration_path, notice: 'You need to create a company first.'
   end
 
   def current_user_companies_active
