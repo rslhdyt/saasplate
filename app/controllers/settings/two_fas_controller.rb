@@ -1,9 +1,14 @@
 module Settings
   class TwoFasController < SettingsController
     def edit
-      issuer = Rails.configuration.application_name
       label = current_user.email
+      issuer = Rails.configuration.application_name
+      
+      if current_user.otp_secret.nil?
+        current_user.update(otp_secret: User.generate_otp_secret)
+      end
 
+      @totp = current_user.otp_secret
       @profisioning_url = current_user.otp_provisioning_uri(label, issuer: issuer)
     end
 
