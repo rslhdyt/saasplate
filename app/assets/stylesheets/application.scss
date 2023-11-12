@@ -45,3 +45,24 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
         margin-left: -15rem;
     }
 }
+
+// custom css
+.text-divider {
+    display: flex;
+    flex-direction: row;
+}
+
+.text-divider:before, .text-divider:after{
+    content: "";
+    flex: 1 1;
+    border-bottom: 1px solid #bebebe;
+    margin: auto;
+}
+
+.text-divider:before {
+    margin-right: 13px
+}
+
+.text-divider:after {
+    margin-left: 13px
+}
