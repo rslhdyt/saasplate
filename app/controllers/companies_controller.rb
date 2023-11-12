@@ -2,10 +2,6 @@ class CompaniesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_company, only: %i[ show edit update destroy ]
 
-  skip_before_action :user_has_company?, only: %i[new create]
-
-  layout :set_layout
-
   # GET /companies or /companies.json
   def index
     @companies = current_user.companies
@@ -69,19 +65,14 @@ class CompaniesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_company
-      @company = current_user.companies.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def company_params
-      params.require(:company).permit(:name, :email)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_company
+    @company = current_user.companies.find(params[:id])
+  end
 
-    def set_layout
-      return 'devise' if %w[new create].include? action_name
-
-      'application'
-    end
+  # Only allow a list of trusted parameters through.
+  def company_params
+    params.require(:company).permit(:name, :email)
+  end
 end

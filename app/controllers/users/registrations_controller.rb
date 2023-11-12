@@ -2,7 +2,9 @@
 
 module Users
   class RegistrationsController < Devise::RegistrationsController
+    prepend_before_action :authenticate_scope!, only: [:edit, :update, :destroy, :new_company, :create_company]
     before_action :configure_sign_up_params, only: [:create]
+
     # before_action :configure_account_update_params, only: [:update]
 
     # GET /resource/sign_up
@@ -39,6 +41,20 @@ module Users
     #   super
     # end
 
+    def new_company
+      @company = current_user.companies.new
+    end
+
+    def create_company
+      ActiveRecord::Base.transaction do
+        @company = current_user.companies.new(company_params)
+        current_user.user_companies.create(company: @company)
+        current_user.update(active_company: @company)
+      end
+
+      redirect_to root_path, notice: 'Company was successfully created.'
+    end
+
     protected
 
     # If you have extra params to permit, append them to the sanitizer.
@@ -59,12 +75,17 @@ module Users
 
       flash[:notice] = "Welcome to the app! Let's get started by creating your company."
 
-      new_company_path
+      new_register_company_path
     end
 
     # The path used after sign up for inactive accounts.
     # def after_inactive_sign_up_path_for(resource)
     #   super(resource)
     # end
+
+    # Only allow a list of trusted parameters through.
+    def company_params
+      params.require(:company).permit(:name, :email)
+    end
   end
 end
