@@ -9,13 +9,14 @@ module Users
     def create
       @user = User.find_by(email: params[:user][:email])
 
+      flash[:notice] = 'A temporary login code has been sent to your inbox. Please check it.'
+
       if @user.present?
         UserServices::LoginLink.call(@user)
 
-        redirect_to new_user_session_path, notice: 'A temporary login code has been sent to your inbox. Please check it.'
+        redirect_to new_user_session_path
       else
         @user = User.new
-        flash[:notice] = 'Email address not found. Please try again.'
 
         render :new, status: :unprocessable_entity
       end
