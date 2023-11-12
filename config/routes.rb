@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users,
+  devise_for :user,
     controllers: {
       registrations: 'users/registrations',
       sessions: 'users/sessions'
@@ -10,6 +10,11 @@ Rails.application.routes.draw do
       sign_up: 'sign_up',
       sign_out: 'sign_out'
     }
+
+  devise_scope :user do
+    get 'sign_up/companies', to: 'users/registrations#new_company', as: :new_company_registration
+    post 'sign_up/companies', to: 'users/registrations#create_company', as: :company_registration
+  end
 
   scope :sign_in, as: :user_session do
     # Login with link handler
