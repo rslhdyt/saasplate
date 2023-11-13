@@ -36,18 +36,23 @@
             <div class="d-grid gap-2">
               <%= f.submit "Sign In", class: 'btn btn-primary' %>
             </div>
+          <% end %>
 
-            <p class="text-divider text-muted mt-3">or</p>
+          <p class="text-divider text-muted mt-3">or</p>
 
-            <div class="d-grid gap-2">
-              <%= link_to "Login with link", new_user_session_link_path, class: 'btn btn-outline-primary' %>
-            </div>
+          <div class="d-grid gap-2">
+            <%= link_to "Sign in with link", new_user_session_link_path, class: 'btn btn-outline-primary' %>
+          </div>
 
-            <%- if devise_mapping.omniauthable? %>
-
-              <%- resource_class.omniauth_providers.each do |provider| %>
-                <%= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), data: { turbo: false } %><br />
-              <% end %>
+          <%- if devise_mapping.omniauthable? %>
+            <%- resource_class.omniauth_providers.each do |provider| %>
+                <%= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", 
+                  omniauth_authorize_path(resource_name, provider), 
+                  data: { turbo: false },
+                  form: {
+                    class: 'd-grid mt-2'
+                  },
+                  class: 'btn btn-outline-primary' %>
             <% end %>
           <% end %>
         </div>

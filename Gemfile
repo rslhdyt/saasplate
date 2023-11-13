@@ -70,8 +70,14 @@ group :test do
 end
 
 gem "dotenv-rails", "~> 2.8"
+
+# Devise gems related
 gem "devise", "~> 4.9"
 gem 'devise-two-factor'
+gem 'omniauth-github'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
+
 gem "rqrcode"
 gem "dartsass-rails", "~> 0.5.0"
 gem "bootstrap", "~> 5.3"

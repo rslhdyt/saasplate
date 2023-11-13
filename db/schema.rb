@@ -10,9 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_18_165459) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_13_010220) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "auth_providers", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "uid", null: false
+    t.string "access_token"
+    t.string "refresh_token"
+    t.datetime "expires_at"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name", "uid"], name: "index_auth_providers_on_name_and_uid", unique: true
+    t.index ["user_id"], name: "index_auth_providers_on_user_id"
+  end
 
   create_table "companies", force: :cascade do |t|
     t.bigint "owner_id"
@@ -75,6 +88,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_18_165459) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "auth_providers", "users"
   add_foreign_key "companies", "users", column: "owner_id"
   add_foreign_key "user_companies", "companies"
   add_foreign_key "user_companies", "users"
