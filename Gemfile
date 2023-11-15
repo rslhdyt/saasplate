@@ -77,6 +77,7 @@ gem 'devise-two-factor'
 gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
+gem 'recaptcha'
 
 gem "rqrcode"
 gem "dartsass-rails", "~> 0.5.0"

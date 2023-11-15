@@ -1,0 +1,5 @@
+<%= turbo_stream.replace :recaptchas do %>
+  <div class='mt-3 mb-3' id='recaptchaV2' data-controller='load-recaptcha-v2' data-load-recaptcha-v2-site-key-value=<%= ENV['RECAPTCHA_SITE_KEY_V2'] %>></div>
+<% end %>
+
+<%= turbo_stream.update(:flashes, partial: 'layouts/partials/toast', locals: { alert: 'Please check the ReCaptcha to continue' }) %>

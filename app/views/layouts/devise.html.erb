@@ -11,7 +11,9 @@
   </head>
 
   <body>
-    <%= render 'layouts/partials/toast' %>
+    <%= turbo_frame_tag :flashes do %>
+      <%= render 'layouts/partials/toast' %>
+    <% end %>
     
     <%= yield %>
   </body>

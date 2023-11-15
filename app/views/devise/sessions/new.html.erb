@@ -24,6 +24,10 @@
               <%= f.password_field :password, class: 'form-control', autocomplete: "password" %>
             </div>
 
+            <%= turbo_frame_tag 'recaptchas' do %>
+              <%= recaptcha_v3(action: 'login') %>
+            <% end %>
+
             <div class="d-grid gap-2">
               <%= f.submit "Sign In", class: 'btn btn-primary' %>
             </div>
