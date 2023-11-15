@@ -26,7 +26,7 @@ module Users
       @user = User.find_signed(params[:token], purpose: :magic_link)
 
       if @user.present?
-        if resource.otp_required_for_login?
+        if @user.otp_required_for_login?
           session[:otp_user_id] = @user.id
 
           redirect_to new_user_session_otp_path

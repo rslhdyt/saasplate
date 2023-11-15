@@ -12,12 +12,10 @@ module Settings
 
         flash[:success] = 'Password successfully updated.'
 
-        return redirect_to settings_security_path
+        redirect_to settings_security_path
+      else
+        redirect_to settings_security_path, alert: 'Old password is incorrect.'
       end
-
-      flash[:danger] = 'Invalid email or password.'
-
-      redirect_to new_user_session_path
     end
 
     private

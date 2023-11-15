@@ -38,9 +38,10 @@ module Users
 
     def accept
       invitation = UserServices::AcceptInvitation.call(params[:invitation_token])
-
-      if invitation.user.password_token.present?
-        redirect_to edit_user_password_path(reset_password_token: invitation.password_token), notice: I18n.t('pages.invitations.setup_password')
+      user = invitation[:user]
+      if user.reset_password_token.present?
+        redirect_to edit_user_password_path(reset_password_token: user.reset_password_token), 
+          notice: I18n.t('pages.invitations.setup_password')
       else
         redirect_to new_user_session_path, notice: I18n.t('pages.invitations.accepted')
       end

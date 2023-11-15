@@ -71,7 +71,7 @@ end
 
 gem "dotenv-rails", "~> 2.8"
 
-# Devise gems related
+# Authentication
 gem "devise", "~> 4.9"
 gem 'devise-two-factor'
 gem 'omniauth-github'
@@ -84,3 +84,6 @@ gem "dartsass-rails", "~> 0.5.0"
 gem "bootstrap", "~> 5.3"
 gem "kaminari", "~> 1.2"
 gem 'bootstrap5-kaminari-views'
+
+# active admin
+gem 'activeadmin'

@@ -75,7 +75,7 @@ module Users
 
       flash[:notice] = "Welcome to the app! Let's get started by creating your company."
 
-      new_register_company_path
+      new_company_registration_path
     end
 
     # The path used after sign up for inactive accounts.
@@ -86,6 +86,7 @@ module Users
     # Only allow a list of trusted parameters through.
     def company_params
       params.require(:company).permit(:name, :email)
+        .merge(owner_id: current_user.id)
     end
   end
 end
