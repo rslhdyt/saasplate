@@ -87,3 +87,4 @@ gem 'bootstrap5-kaminari-views'
 
 # active admin
 gem 'activeadmin'
+gem "rails-settings-cached", "~> 2.9"

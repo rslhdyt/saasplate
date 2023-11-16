@@ -4,6 +4,7 @@ module Users
   class RegistrationsController < Devise::RegistrationsController
     prepend_before_action :authenticate_scope!, only: [:edit, :update, :destroy, :new_company, :create_company]
     before_action :configure_sign_up_params, only: [:create]
+    before_action :check_registration_enabled, only: [:new, :create]
 
     # before_action :configure_account_update_params, only: [:update]
 
@@ -87,6 +88,14 @@ module Users
     def company_params
       params.require(:company).permit(:name, :email)
         .merge(owner_id: current_user.id)
+    end
+
+    private
+
+    def check_registration_enabled
+      return if AppConfig.register_enable?
+
+      render file: "#{Rails.root}/public/404.html", status: :not_found
     end
   end
 end
