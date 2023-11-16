@@ -25,8 +25,8 @@ class SubscriptionManagement < ActiveRecord::Migration[7.1]
       t.date :issue_date,         null: false
       t.date :due_date,           null: false
       t.integer :status,          null: false, default: 0
-      t.string :pg_gateway
-      t.string :pg_gateway_ref
+      t.string :payment_gateway
+      t.string :payment_gateway_ref
       t.string :invoice_url
       t.string :invoice_number
 
