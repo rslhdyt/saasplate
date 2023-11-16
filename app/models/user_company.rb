@@ -1,6 +1,4 @@
 class UserCompany < ApplicationRecord
-  include Ransackable
-
   # associations
   belongs_to :user
   belongs_to :company

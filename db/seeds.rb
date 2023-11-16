@@ -14,3 +14,17 @@ AdminUser.find_or_create_by(email: ENV['ADMIN_USER_EMAIL']) do |user|
   user.password = 'password'
   user.password_confirmation = 'password'
 end
+
+if Rails.env.development?
+  subscription_plans = %w[Free Basic Premium Enterprise]
+  base_price = 1000
+
+  subscription_plans.each_with_index do |plan, index|
+    SubscriptionPlan.find_or_create_by(name: plan) do |subscription_plan|
+      subscription_plan.description = "This is #{plan} plan"
+      subscription_plan.price = base_price * (index + 1)
+      subscription_plan.billing_cycle = :monthly
+      subscription_plan.status = :active
+    end
+  end
+end

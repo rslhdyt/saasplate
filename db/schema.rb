@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_16_141117) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_16_160632) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,12 +60,55 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_16_141117) do
     t.index ["owner_id"], name: "index_companies_on_owner_id"
   end
 
+  create_table "invoices", force: :cascade do |t|
+    t.string "invoiceable_type", null: false
+    t.bigint "invoiceable_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "total_amount", null: false
+    t.date "issue_date", null: false
+    t.date "due_date", null: false
+    t.integer "status", default: 0, null: false
+    t.string "pg_gateway"
+    t.string "pg_gateway_ref"
+    t.string "invoice_url"
+    t.string "invoice_number"
+    t.integer "paid_amount", default: 0
+    t.date "paid_date"
+    t.string "payment_method"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invoiceable_type", "invoiceable_id"], name: "index_invoices_on_invoiceable"
+    t.index ["user_id"], name: "index_invoices_on_user_id"
+  end
+
   create_table "settings", force: :cascade do |t|
     t.string "var", null: false
     t.text "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["var"], name: "index_settings_on_var", unique: true
+  end
+
+  create_table "subscription_plans", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description", null: false
+    t.integer "price", null: false
+    t.integer "billing_cycle", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.bigint "subscription_plan_id", null: false
+    t.bigint "company_id", null: false
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_subscriptions_on_company_id"
+    t.index ["subscription_plan_id"], name: "index_subscriptions_on_subscription_plan_id"
   end
 
   create_table "user_companies", force: :cascade do |t|
@@ -119,6 +162,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_16_141117) do
 
   add_foreign_key "auth_providers", "users"
   add_foreign_key "companies", "users", column: "owner_id"
+  add_foreign_key "invoices", "users"
+  add_foreign_key "subscriptions", "companies"
+  add_foreign_key "subscriptions", "subscription_plans"
   add_foreign_key "user_companies", "companies"
   add_foreign_key "user_companies", "users"
 end

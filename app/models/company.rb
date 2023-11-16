@@ -1,6 +1,4 @@
 class Company < ApplicationRecord
-  include Ransackable
-
   # associations
   belongs_to :owner, class_name: 'User', optional: true
   has_many :user_companies, dependent: :restrict_with_exception

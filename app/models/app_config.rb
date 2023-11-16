@@ -1,7 +1,5 @@
 # RailsSettings Model
 class AppConfig < RailsSettings::Base
-  include Ransackable
-
   cache_prefix { "app_config" }
 
   # Define your fields
