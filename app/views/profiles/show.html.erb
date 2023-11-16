@@ -7,4 +7,36 @@
 
 <div class="mt-4 px-3">
   <%= render 'user' %>
+
+  <div class="card mt-3">
+    <div class="card-header">Auth Providers</div>
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        <% User.omniauth_providers.each do |supported_provider| %>
+          <li class="list-group-item d-flex justify-content-between">
+            <span><%= supported_provider %></span>
+
+            <% if @auth_providers[supported_provider.to_s].present? %>
+              <%= button_to 'Disconnect',
+                          settings_auth_provider_path(@auth_providers[supported_provider.to_s][:id]), 
+                          form: {
+                            data: { 
+                              turbo_confirm: 'Are you sure?',
+                              method: :delete
+                            },
+                          },
+                          method: :delete,
+                          class: 'btn btn-outline-danger' %>
+            <% else %>
+              <%= button_to 'Connect', 
+                omniauth_authorize_path(:user, supported_provider), 
+                class: 'btn btn-outline-primary', 
+                method: :post %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 </div>
+

@@ -1,5 +1,12 @@
 class ProfilesController < SettingsController
-  def show; end
+  def show
+    @user = current_user
+
+    @auth_providers = {}
+    @user.auth_providers.each do |provider|
+      @auth_providers[provider.name.downcase] = { id: provider.id }
+    end
+  end
 
   def edit
     @user = current_user

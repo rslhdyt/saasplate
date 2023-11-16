@@ -46,6 +46,7 @@ Rails.application.routes.draw do
   namespace :settings do
     resource :security, only: %i[show update]
     resource :two_fa, only: %i[edit update destroy]
+    resources :auth_providers, only: %i[destroy]
   end
   
   resources :users, except: %i[new create]
