@@ -1,6 +1,8 @@
 ActiveAdmin.register Company do
   menu priority: 2, parent: 'User & Company'
 
+  includes user_companies: :user
+
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -45,6 +47,23 @@ ActiveAdmin.register Company do
         end
       end
     end
+
+    panel "Subscriptions" do
+      table_for company.subscriptions do
+        column :id
+        column :subscription_package do |subscription|
+          subscription.subscription_package.subscription_plan_name
+        end
+        column :start_date
+        column :end_date
+        column :status
+        column :created_at
+
+        column :actions do |subscription|
+          link_to 'View', admin_subscription_path(subscription.id)
+        end
+      end
+    end
   end
 
   action_item :invite_user, only: :show do
@@ -60,4 +79,22 @@ ActiveAdmin.register Company do
     # TODO: support internationalization
     redirect_to admin_deal_path(resource.id), notice: 'Deal was successfully recalculated!'
   end
+
+  # add sidebar to show page
+  sidebar 'Active Subscription', only: :show do
+    attributes_table_for company.active_subscription do
+      row :id
+      row :subscription_plan_name
+      row :start_date
+      row :end_date
+      row :price
+      row :status
+      row :created_at
+      row :updated_at
+    end
+
+    # add link to create new subscription
+    link_to 'Create New Subscription', new_admin_subscription_path(company_id_eq: company.id)
+  end
+
 end

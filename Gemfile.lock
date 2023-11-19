@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/rslhdyt/xendit_api.git
+  revision: 4bd153ad41a8d71eea78804141d2f351d2e369b4
+  branch: main
+  specs:
+    xendit_api (0.1.0)
+      faraday (~> 1.0)
+      faraday_middleware (~> 1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -144,11 +153,11 @@ GEM
       ruby2_keywords
     erubi (1.12.0)
     execjs (2.9.1)
-    faraday (2.7.11)
-      base64
-      faraday-net_http (>= 2.0, < 3.1)
-      ruby2_keywords (>= 0.0.4)
-    faraday-net_http (3.0.2)
+    faraday (1.2.0)
+      multipart-post (>= 1.2, < 3)
+      ruby2_keywords
+    faraday_middleware (1.2.0)
+      faraday (~> 1.0)
     ffi (1.16.3)
     formtastic (5.0.0)
       actionpack (>= 6.0.0)
@@ -210,6 +219,7 @@ GEM
     minitest (5.20.0)
     msgpack (1.7.2)
     multi_xml (0.6.0)
+    multipart-post (2.3.0)
     mutex_m (0.1.2)
     net-imap (0.3.7)
       date
@@ -428,6 +438,7 @@ DEPENDENCIES
   tzinfo-data
   web-console
   webdrivers
+  xendit_api!
 
 RUBY VERSION
    ruby 3.2.2p53

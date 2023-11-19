@@ -1,12 +1,12 @@
-ActiveAdmin.register SubscriptionPlan do
-  menu parent: 'Subscription Management', priority: 3
+ActiveAdmin.register SubscriptionPackage do
+  menu parent: 'Subscription Management', priority: 2
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :name, :description, :price, :billing_cycle, :status
+  permit_params :subscription_plan_id, :price, :billing_cycle, :billing_duration, :status
   #
   # or
   #
@@ -17,5 +17,8 @@ ActiveAdmin.register SubscriptionPlan do
   # end
   
   filter :name
-  filter :status, as: :select, collection: SubscriptionPlan.statuses.keys
+  filter :price
+  filter :billing_cycle
+  filter :billing_duration
+  filter :status, as: :select, collection: SubscriptionPackage.statuses.keys
 end

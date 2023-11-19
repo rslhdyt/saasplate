@@ -61,6 +61,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_16_160632) do
   end
 
   create_table "invoices", force: :cascade do |t|
+    t.uuid "external_id", default: -> { "gen_random_uuid()" }, null: false
     t.string "invoiceable_type", null: false
     t.bigint "invoiceable_id", null: false
     t.bigint "user_id", null: false
@@ -89,26 +90,40 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_16_160632) do
     t.index ["var"], name: "index_settings_on_var", unique: true
   end
 
-  create_table "subscription_plans", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "description", null: false
+  create_table "subscription_packages", force: :cascade do |t|
+    t.bigint "subscription_plan_id"
     t.integer "price", null: false
     t.integer "billing_cycle", null: false
+    t.integer "billing_duration", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subscription_plan_id"], name: "index_subscription_packages_on_subscription_plan_id"
+  end
+
+  create_table "subscription_plans", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "image"
+    t.string "description", null: false
+    t.string "features", default: [], array: true
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "subscriptions", force: :cascade do |t|
-    t.bigint "subscription_plan_id", null: false
+    t.bigint "subscription_package_id", null: false
     t.bigint "company_id", null: false
     t.date "start_date", null: false
     t.date "end_date", null: false
+    t.integer "price", null: false
+    t.integer "billing_cycle", null: false
+    t.integer "billing_duration", null: false
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_subscriptions_on_company_id"
-    t.index ["subscription_plan_id"], name: "index_subscriptions_on_subscription_plan_id"
+    t.index ["subscription_package_id"], name: "index_subscriptions_on_subscription_package_id"
   end
 
   create_table "user_companies", force: :cascade do |t|
@@ -163,8 +178,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_16_160632) do
   add_foreign_key "auth_providers", "users"
   add_foreign_key "companies", "users", column: "owner_id"
   add_foreign_key "invoices", "users"
+  add_foreign_key "subscription_packages", "subscription_plans"
   add_foreign_key "subscriptions", "companies"
-  add_foreign_key "subscriptions", "subscription_plans"
+  add_foreign_key "subscriptions", "subscription_packages"
   add_foreign_key "user_companies", "companies"
   add_foreign_key "user_companies", "users"
 end

@@ -88,3 +88,6 @@ gem 'bootstrap5-kaminari-views'
 # active admin
 gem 'activeadmin'
 gem "rails-settings-cached", "~> 2.9"
+
+# payment gateway
+gem 'xendit_api', github: 'rslhdyt/xendit_api', branch: 'main'
