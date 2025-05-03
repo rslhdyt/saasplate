@@ -2,7 +2,7 @@
 
 module Users
   class SessionsController < Devise::SessionsController
-    prepend_before_action :check_captcha, only: [:create]
+    # prepend_before_action :check_captcha, only: [:create]
 
     # POST /sign_in
     def create
@@ -41,6 +41,7 @@ module Users
       v2_verify = verify_recaptcha(secret_key: ENV['RECAPTCHA_SECRET_KEY_V2'])
 
       return if v3_verify || v2_verify
+      # return if v3_verify
       
       self.resource = resource_class.new sign_in_params
       

@@ -6,7 +6,7 @@ ActiveAdmin.register Company do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :owner_id, :name, :email, :phone, :address
+  permit_params :owner_id, :name, :email, :phone, :address
   #
   # or
   #
